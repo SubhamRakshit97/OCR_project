@@ -53,7 +53,7 @@ A Python-based web application that allows users to upload an image of a visitin
   - Instructions to run locally provided in the next section.
   
 - **Cloud Deployment**: 
-  - Deployed on a free cloud platform that supports Python (e.g., Heroku, PythonAnywhere).
+  - Deployed on a free cloud platform that supports Python (e.g., Render).
   - Access the deployed application via the public URL.
 
 ---
