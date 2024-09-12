@@ -158,10 +158,10 @@ A Python-based web application that allows users to upload an image of a visitin
 
 ## Technologies Used
 
-- **Backend**: Flask/Django, Python, Tesseract OCR
+- **Backend**: Django, Python, Tesseract OCR
 - **Frontend**: HTML, CSS, JavaScript
-- **Database**: SQLite/PostgreSQL/MongoDB
-- **Deployment**: Heroku, PythonAnywhere
+- **Database**: SQLite
+- **Deployment**: Render, Docker
 
 ---
 
