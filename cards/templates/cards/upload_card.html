@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Visiting Card</title>
+    <style>
+        /* Base styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container styling */
+        .container {
+            width: 60%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form input[type="file"] {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Preview styling */
+        .preview {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #card-image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Fields styling */
+        .fields {
+            margin-top: 30px;
+        }
+
+        .fields label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .fields input[type="text"],
+        .fields input[type="email"],
+        .fields textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .fields textarea {
+            height: 100px;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Visiting Card</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Upload</button>
+        </form>
+        <div class="preview">
+            <img id="card-image-preview" src="#" alt="Image Preview" style="display:none;"/>
+        </div>
+        <div class="fields">
+            <h3>Extracted Information</h3>
+            <label for="name">Name:</label> 
+            <input type="text" id="name" value="{{ extracted_info.name|default:'' }}" readonly>
+            <label for="job_title">Job Title:</label> 
+            <input type="text" id="job_title" value="{{ extracted_info.job_title|default:'' }}" readonly>
+            <label for="company_name">Company Name:</label> 
+            <input type="text" id="company_name" value="{{ extracted_info.company_name|default:'' }}" readonly>
+            <label for="email">Email Address:</label> 
+            <input type="email" id="email" value="{{ extracted_info.email|default:'' }}" readonly>
+            <label for="phone_number">Phone Number:</label> 
+            <input type="text" id="phone_number" value="{{ extracted_info.phone_number|default:'' }}" readonly>
+            <label for="address">Address:</label> 
+            <textarea id="address" rows="4" readonly>{{ extracted_info.address|default:'' }}</textarea>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('input[type="file"]').addEventListener('change', function(event) {
+            const [file] = event.target.files;
+            if (file) {
+                const preview = document.getElementById('card-image-preview');
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
