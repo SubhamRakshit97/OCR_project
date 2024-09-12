@@ -23,5 +23,5 @@ ENV DJANGO_SETTINGS_MODULE=visiting_card_app.settings
 # Expose port 8000 for the application
 EXPOSE 8000
 
-# Command to run the application
-CMD ["gunicorn", "visiting_card_app.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Run database migrations and start the application
+CMD ["sh", "-c", "python manage.py migrate && gunicorn visiting_card_app.wsgi:application --bind 0.0.0.0:8000"]
